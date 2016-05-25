@@ -1,0 +1,16 @@
+plate, 3
+load, 3
+uniformli, 3
+clamp, 3
+edg, 3
+sectori, 2
+bend, 2
+solut, 1
+subject, 1
+method, 1
+paper, 1
+superposit, 1
+elementari, 1
+analyz, 1
+distribut, 1
+circular, 1

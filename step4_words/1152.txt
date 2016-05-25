@@ -1,0 +1,14 @@
+approxim, 2
+oscil, 2
+studi, 2
+oseen, 2
+wake, 2
+reynold, 1
+mech, 1
+order, 1
+vortex, 1
+number, 1
+period, 1
+obstacl, 1
+math, 1
+mean, 1

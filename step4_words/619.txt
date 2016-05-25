@@ -1,0 +1,17 @@
+atmospher, 2
+result, 2
+satellit, 2
+orbit, 1
+rotat, 1
+method, 1
+take, 1
+densiti, 1
+account, 1
+season, 1
+refin, 1
+upper, 1
+daytonight, 1
+latitud, 1
+previous, 1
+analysi, 1
+report, 1

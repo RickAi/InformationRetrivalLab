@@ -1,0 +1,16 @@
+thermal, 3
+buckl, 2
+stress, 2
+panel, 2
+superson, 2
+wing, 2
+structur, 1
+subject, 1
+multicellular, 1
+analyz, 1
+establish, 1
+cover, 1
+temperatur, 1
+plate, 1
+distribut, 1
+criterion, 1

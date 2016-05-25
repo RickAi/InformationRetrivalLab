@@ -1,0 +1,15 @@
+properti, 2
+tabl, 2
+carbon, 2
+transport, 1
+thermal, 1
+steam, 1
+argon, 1
+thermodynam, 1
+hydrogen, 1
+dioxid, 1
+air, 1
+gase, 1
+oxygen, 1
+monoxid, 1
+nitrogen, 1

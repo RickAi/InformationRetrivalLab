@@ -304,7 +304,7 @@ class Utils:
         tf_idf_out_file.close()
 
     @staticmethod
-    def calculate_tf_rtf_in_document(words):
+    def calculate_tf_rtf_in_document(words, appear_count_word_set):
         # convert to word-frequency key-value map
         words_dict = {}
         for word in words:
@@ -318,7 +318,6 @@ class Utils:
         fre_values = sorted(words_dict.values())
         max_frequency = fre_values[len(fre_values) - 1]
         document_count = 1398
-        appear_count_word_set = Utils.get_word_count_set_from_file("words_count_appear_in_document.txt")
 
         tf_rtf_dict = {}
         for word in words_dict.keys():
@@ -369,6 +368,9 @@ class Utils:
         # init length of query
         result_dict = {}
         query_length = Utils.calculate_length_of_document(query_words_tf_rtf_dict)
+
+        if query_length == 0:
+            return dict()
 
         index = 0
         while index < 1398:

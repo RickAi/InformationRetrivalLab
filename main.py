@@ -6,7 +6,6 @@ import porter
 from utils import Utils
 from article import Article
 
-
 # step1: extract all the data to files
 # step1_extract_raw_files()
 
@@ -25,7 +24,7 @@ from article import Article
 
 # ask user to input first, then parse words to list
 
-def query_loop(query):
+def query_loop(query, appear_count_word_set):
     word_list = query.split()
     words = []
     count = 0
@@ -51,14 +50,22 @@ def query_loop(query):
         stemmed_words.insert(count, stemmed_word)
         count += 1
 
+    if len(stemmed_words) == 0:
+        print("\nNo result!\n")
+        return
+
     # calculate tf rtf for each word, return a dict
-    tf_rtf_dict = Utils.calculate_tf_rtf_in_document(stemmed_words)
+    tf_rtf_dict = Utils.calculate_tf_rtf_in_document(stemmed_words, appear_count_word_set)
     # print("\n" + "Query tf-idf:\n")
     # print(tf_rtf_dict)
     # print("\n")
 
     # calculate cos result for each document
     result_dict = Utils.return_query_result_dict(tf_rtf_dict, index_length_dict, index_tf_idf_dict)
+
+    if len(result_dict) == 0:
+        print("\nNo result!\n")
+        return
 
     # sort the dict
     sorted_dict = sorted(result_dict.items(), key=operator.itemgetter(1))
@@ -77,7 +84,8 @@ def query_loop(query):
     for item in top_10_list:
         index = item[0]
         cos_value = item[1]
-        print("top \t" + str(rank) + ":\tindex:" + str(index) + "\tvalue:" + str(cos_value))
+        if float(cos_value) != 0.0:
+            print("top \t" + str(rank) + ":\tindex: " + str(index) + "\tvalue: " + str(cos_value))
         rank += 1
 
 
@@ -163,10 +171,13 @@ def step5_tf_rtfs_cos():
 if __name__ == '__main__':
     start_time = time.time()
 
+    # init start
     tf_idf_infos_file = open("tf_idf_infos.txt", "r")
     index_length_dict = dict()
     index_tf_idf_dict = dict()
+    appear_count_word_set = Utils.get_word_count_set_from_file("words_count_appear_in_document.txt")
 
+    # cache dicts into memory
     tf_idf_one_file_info = tf_idf_infos_file.readline()
     while tf_idf_one_file_info != "":
         infos = tf_idf_one_file_info.split(" ")
@@ -182,10 +193,25 @@ if __name__ == '__main__':
     end_time = time.time()
     print("init success! Cost time: %.2f seconds" % (end_time - start_time))
 
-    query = input("Ready to query(enter nothing to stop):")
+    # ready to query from input
+    query = input("Ready to query (enter nothing to exit):")
     while query != "":
         query_start_time = time.time()
-        query_loop(query)
+        query_loop(query, appear_count_word_set)
         query_end_time = time.time()
+        # print result
         print("query success! Cost time: %.2f seconds" % (query_end_time - query_start_time) + "\n")
+        see_document = input("Enter document number to see content (enter nothing to exit):")
+        while see_document != "":
+            if int(see_document) > 1400 or int(see_document) < 1:
+                print("cannot find that document, enter again!")
+                see_document = input("Enter document number to see content (enter nothing to exit):")
+                continue
+            file = open("step1/" + see_document + ".txt")
+            content = file.read()
+            print("\n============================================")
+            print(content)
+            print("============================================\n")
+            file.close()
+            see_document = input("Enter document number to see content (enter nothing to exit):")
         query = input("Ready to query(enter nothing to stop):")

@@ -1,3 +1,4 @@
+import numbers
 import operator
 import time
 import os
@@ -5,6 +6,8 @@ import re
 import porter
 from utils import Utils
 from article import Article
+
+# steps to generate cache files, I have explain it in README.txt
 
 # step1: extract all the data to files
 # step1_extract_raw_files()
@@ -179,6 +182,8 @@ if __name__ == '__main__':
 
     # cache dicts into memory
     tf_idf_one_file_info = tf_idf_infos_file.readline()
+
+    # parse tf-idf info from file generated before
     while tf_idf_one_file_info != "":
         infos = tf_idf_one_file_info.split(" ")
         index_info = infos[0]
@@ -191,6 +196,7 @@ if __name__ == '__main__':
     tf_idf_infos_file.close()
 
     end_time = time.time()
+    # init finished, print init cost time
     print("init success! Cost time: %.2f seconds" % (end_time - start_time))
 
     # ready to query from input
@@ -201,17 +207,25 @@ if __name__ == '__main__':
         query_end_time = time.time()
         # print result
         print("query success! Cost time: %.2f seconds" % (query_end_time - query_start_time) + "\n")
+
+        # ask user a document number to get content of article
         see_document = input("Enter document number to see content (enter nothing to exit):")
         while see_document != "":
-            if int(see_document) > 1400 or int(see_document) < 1:
-                print("cannot find that document, enter again!")
+            try:
+                # the number should be a valid range
+                if int(see_document) > 1400 or int(see_document) < 1:
+                    print("cannot find that document, enter again!")
+                    see_document = input("Enter document number to see content (enter nothing to exit):")
+                    continue
+                file = open("step1/" + see_document + ".txt")
+                content = file.read()
+                print("\n============================================")
+                print(content)
+                print("============================================\n")
+                file.close()
                 see_document = input("Enter document number to see content (enter nothing to exit):")
-                continue
-            file = open("step1/" + see_document + ".txt")
-            content = file.read()
-            print("\n============================================")
-            print(content)
-            print("============================================\n")
-            file.close()
-            see_document = input("Enter document number to see content (enter nothing to exit):")
+            except ValueError:
+                # if user enter wrong number, like string, it should not be allowed
+                print("please enter valid integer number for document!");
+                see_document = input("Enter document number to see content (enter nothing to exit):")
         query = input("Ready to query(enter nothing to stop):")

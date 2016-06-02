@@ -8,9 +8,23 @@ and you will on the way to go
 
 mention that you need use PYTHON3
 
+YOU can see how I generate tf-idf in Utils class def generate_tf_rtfs method!
+
+HERE is my process to do my program:
+  1. extract the document contents, save documents individually into directory step1
+1.5. split words in all the documents, save result into directory step1.5
+  2. filter stop words and sort all the words in documents, save result into directory step2
+  3. stem words and save result into directory step3
+  4. generate words frequency in it's own document, save result into directory step4_words
+  5. calculate words count appear in all documents, save result into file words_count_appear_in_document.txt
+  6. calculate words largest frequency in all documents, save result into file words_largest_time_in_document.txt
+  7. generate tf_idf_infos.txt by using file generated before
+
+EACH time I run this program to query, it will only read files which was generated before.
+THEREFORE, the speed will be very very fast!
+IT only cost 0.2s for initialize and 0s - 0.5s for query in my computer!
 
 SAMPLE RUN:
-
 python3 main.py
 init success! Cost time: 0.18 seconds
 Ready to query (enter nothing to exit):presence of the edge shearing forces is found to diminish the

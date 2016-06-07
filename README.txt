@@ -2,11 +2,16 @@ To run the program, just go to the directory of IRLab
 
 then enter command: 
 
-python3 main.py
+python3 query.py
 
 and you will on the way to go
 
 mention that you need use PYTHON3
+
+For EXTRA, I try to do evaluation by your submitted files in moodle,
+you can see it in evalution.py file
+
+
 
 YOU can see how I generate tf-idf in Utils class def generate_tf_rtfs method!
 
@@ -156,7 +161,6 @@ presence of the edge shearing forces is found to diminish the
 critical bending stress in this case .  calculations are made
 for various magnitudes of bending and shearing forces for
 plates of various proportions .
-
 ============================================
 
 Enter document number to see content (enter nothing to exit):
